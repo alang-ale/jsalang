@@ -18,7 +18,7 @@ while(salir!=true){
     decision=3
     while(decision !=1 && decision !=2){
 
-    decision = prompt("ABM Productos\n¿Qué desea hacer?\n1-Agregar producto\n2-Eliminar producto")
+    decision = prompt("ABM Productos\n¿Qué desea hacer?\n1-Agregar producto\n2-Eliminar producto\n0-Salir")
 
     if(decision==0)
     {
