@@ -1,32 +1,34 @@
 
-const agregarProducto = (nombre,valor) => {
-    alert("Producto "+nombre+" con el valor "+valor+" ingresado correctamente")
-    return productos.push([nombre,valor])
+const agregarPlayer = (nombre,posicion) => {
+    alert("Jugador "+nombre+" que juega de "+posicion+" registrado correctamente")
+    jugadores.push([nombre,posicion])
 
   }
 
-  const eliminarProducto = (nombre) => {
-    alert(productos.find(producto => nombre==producto))
+  const eliminarPlayer = (nombre) => {  
+    alert(productos.find(producto => nombre==producto))//usar includes
     
   }
 
+
+
 let decision 
 let salir 
-let productos = [[]]
+let jugadores = []
 
 while(salir!=true){
     decision=3
     while(decision !=1 && decision !=2){
 
-    decision = prompt("ABM Productos\n¿Qué desea hacer?\n1-Agregar producto\n2-Eliminar producto\n0-Salir")
+    decision = prompt("Jugadores\n¿Qué desea hacer?\n1-Agregar jugador\n2-Eliminar jugador\n3-Ingrese `delanteros` para verlos\n3-Ingrese `defensores` para verlos\n0-Salir")
 
     if(decision==0)
     {
        salir=true;
-       listado= productos.join("\n")
+       listado= jugadores.join("\n")
        
        listado = listado.replaceAll(",","             ")
-       alert("Ingresó los siguientes productos y sus valores: \n PRODUCTO       VALOR" + listado)
+       alert("Ingresó los siguientes jugadores y su posición: \n JUGADOR       POSICION\n" + listado)
         alert("Proceso finalizado. Para hacer otra acción vuelva a ingresar al sitio")
         break
         
@@ -34,9 +36,9 @@ while(salir!=true){
 
         else if(decision==1)
         {
-            let nombre = prompt("Ingrese nombre de producto")
-            let valor = prompt("Ingrese valor del producto")
-            agregarProducto(nombre,valor)
+            let nombre = prompt("Ingrese nombre de jugador")
+            let valor = prompt("Ingrese posicion")
+            agregarPlayer(nombre,valor)
 
             
         }
@@ -44,7 +46,21 @@ while(salir!=true){
             else if(decision==2)
             {
                 let nombre = prompt("Ingrese nombre de producto a eliminar")
-                eliminarProducto(nombre)
-    }
-}
+                eliminarPlayer(nombre)
+            }
+                else if(decision=="delanteros" || decision=="defensores"){
+                   
+                    filtro = jugadores.filter(posicion => posicion = decision)
+                  
+                    filtro.forEach(el => {
+                        console.log(el[0])
+                    });
+                }
+                    else if(decision=="listar"){
+                        
+                        const listado = jugadores.map(jugador => jugador[0])
+                        alert(listado)
+                    }
+
+                }
 }
