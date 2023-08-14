@@ -1,7 +1,9 @@
+let id = 0
 class player{
-    constructor (name,posicion){
+    constructor (name,posicion,id){
         this.name = name
         this.posicion = posicion
+        this.id = id
     }
 }
 
@@ -10,74 +12,96 @@ class playerController{
         this.listaPlayers = []
     }
 
-    agregarPlayer(player) {
-        alert("Jugador "+player.name+" que juega de "+player.posicion+" registrado correctamente")
-        this.listaPlayers.push(player)
+    agregarPlayer(nombre,posicion) {
         
+        id = id+1
+        alert("Jugador "+nombre +id+" registrado correctamente")
+        
+        let jugador = new player(nombre,posicion,id)
+        this.listaPlayers.push(jugador)
+        controlador_players.mostrarPlayer(jugador)
+        
+        this.listaPlayers.forEach(el=>{ 
+          document.getElementById(`eliminar${el.id}`).addEventListener("click", function() {controlador_players.eliminarPlayer(el.nombre,el.id);});})
+       
+
       }
     
-    eliminarPlayer(nombre){  
-      
+    eliminarPlayer(nombre,borrar){  
+        console.log(`Se pidio eliminar al jugador ${nombre}`)
+        document.getElementById(`eliminar${borrar}`).parentNode.remove()
+
         this.listaPlayers.forEach(el=>{
-            if(el.name == nombre){
-                let id = this.listaPlayers.indexOf(el)
-                this.listaPlayers.splice(id, 1);
+            if(el.id == borrar){
+                let orden = this.listaPlayers.indexOf(el)
+                this.listaPlayers.splice(orden, 1);
+               
             }
 
         })
-
-        return this.listaPlayers
+        
+        console.log(this.listaPlayers)
+      
       }
     
+      
+      mostrarPlayer(player){
+      
+        document.getElementById(player.posicion).innerHTML += ` <div class="card">
+          
+        <img class="card-img-top" src="./assets/img/nophoto.jfif" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title" id="name">${player.name}</</h5>
+            <p class="card-text">${player.posicion.toUpperCase()}</p>
+            
+         </div>
+         <button type="button" class="close" aria-label="Close" id="eliminar${player.id}">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>`;
 
-      mostrarPlayer(){
-       return this.listaPlayers.map(player => player.name)
+      
+  
+       
+
+          
+
+        
+        
+        
+      
+        console.log(this.listaPlayers)
+        
+        
+
+        
+
       }
+      
     }
 
-let decision 
-let salir 
+
+
+function submit(e){
+e.preventdefault();
+}
+
+
+  function testPlayer(form){
+        let posicion = form.pos.value
+        let jugador = form.nombre.value
+        controlador_players.agregarPlayer(jugador,posicion)
+
+      
+      
+
+
+
+}
+
 let jugadores = []
+
 const controlador_players = new playerController()
 
-while(salir!=true){
-    decision=3
-    while(decision !=1 && decision !=2){
 
-    decision = prompt("Jugadores\n¿Qué desea hacer?\n1-Agregar jugador\n2-Mostrar jugador\n3-Eliminar jugador\n0-Salir")
 
-    if(decision==0)
-    {
-       salir=true;
-       listado= jugadores.join("\n")
-       listado = controlador_players.mostrarPlayer()
-       alert("Quedaron registrados los siguientes jugadores: \n" + listado)
-        alert("Proceso finalizado. Para hacer otra acción vuelva a ingresar al sitio")
-        break
-        
-    }
-
-        else if(decision==1)
-        {
-            let nombre = prompt("Ingrese nombre de jugador")
-            let valor = prompt("Ingrese posicion")
-            
-            playerNew = new player(nombre,valor)
-            controlador_players.agregarPlayer(playerNew)
-
-            
-        }
-
-        else if(decision==2)
-        {
-           alert(controlador_players.mostrarPlayer())
-        }
-            
-        else if(decision == 3){
-           let nombre = prompt("Ingrese nombre de jugador a eliminar")
-            controlador_players.eliminarPlayer(nombre)
-        }
-
-    
-                }
-}
