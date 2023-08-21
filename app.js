@@ -17,6 +17,7 @@ class playerController{
     agregarPlayer(nombre,posicion) {
         
         id = id+1
+      
         alert("Jugador "+nombre +id+" registrado correctamente")
         
         let jugador = new player(nombre,posicion,id)
@@ -24,9 +25,10 @@ class playerController{
         controlador_players.mostrarPlayer(jugador)
         
         this.listaPlayers.forEach(el=>{ 
-          document.getElementById(`eliminar${el.id}`).addEventListener("click", function() {controlador_players.eliminarPlayer(el.name,el.id,el.posicion);});})
-          localStorage.setItem("equipo",JSON.stringify(controlador_players.listaPlayers))
-
+          document.getElementById(`eliminar${el.id}`).addEventListener("click", function() {controlador_players.eliminarPlayer(el.name,el.id,el.posicion); });})
+          //localStorage.setItem("equipo",JSON.stringify(controlador_players.listaPlayers))
+          
+          
       }
     
     eliminarPlayer(nombre,borrar,pos){  
@@ -99,56 +101,64 @@ function toast(mensaje){
     }).showToast();
 }
 
-let arq = 0;
-let def = 0;
-let med = 0;
-let del = 0;
+
+
+  
   function main(form){
        
         let posicion = form.pos.value
         let jugador = form.nombre.value
 
-
-
-
+        let arq = controlador_players.listaPlayers.filter(jug=> jug.posicion="arq")
+        let def = controlador_players.listaPlayers.filter(jug=> jug.posicion="def")
+        let med = controlador_players.listaPlayers.filter(jug=> jug.posicion="med")
+        let del = controlador_players.listaPlayers.filter(jug=> jug.posicion="del")
+        
         if(posicion=="arq"){
-            arq=arq+1
-            if(arq>1){
+        
+            
+            if(arq.length>=1){
                 toast("Maximo 1 arquero")
               }
               else{
-                controlador_players.agregarPlayer(jugador,posicion)
+                
+                
+              controlador_players.agregarPlayer(jugador,posicion)
+     
               }
             }
 
               else if(posicion=="def"){
-                def=def+1
-                if(def>4){
+                
+                if(def.length>=4){
                   toast("Maximo 4 defensores")
                 }
                 else{
-                  controlador_players.agregarPlayer(jugador,posicion)
+                  
+                  def = controlador_players.agregarPlayer(jugador,posicion,def)
                 }
               }
 
               else if(posicion=="med"){
-                med=med+1
-                if(med>4){
+                
+                if(med.length>=4){
                   toast("Maximo 4 mediocampistas")
                 }
                 else{
-                  controlador_players.agregarPlayer(jugador,posicion)
+                  med=med+1
+                 med= controlador_players.agregarPlayer(jugador,posicion,med)
                 }
               }
 
               else if(posicion=="del"){
-                del=del+1
+               
                 console.log(del)
-                if(del>2){
+                if(del.length>=2){
                   toast("Maximo 2 delanteros")
                 }
                 else{
-                  controlador_players.agregarPlayer(jugador,posicion)
+                  del=del+1
+                  del = controlador_players.agregarPlayer(jugador,posicion,del)
                 }
               }
               
