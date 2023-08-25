@@ -1,96 +1,5 @@
 let id = 0
-class player{
-    constructor (name,posicion,id){
-        this.name = name
-        this.posicion = posicion
-        this.id = id
-    }
-}
 
-class playerController{
-    constructor(){
-        this.listaPlayers = []
-    }
-    cargarLs(){
-
-    }
-    agregarPlayer(nombre,posicion) {
-        
-        id = id+1
-      
-        alert("Jugador "+nombre +id+" registrado correctamente")
-        
-        let jugador = new player(nombre,posicion,id)
-        this.listaPlayers.push(jugador)
-        controlador_players.mostrarPlayer(jugador)
-        
-        this.listaPlayers.forEach(el=>{ 
-          document.getElementById(`eliminar${el.id}`).addEventListener("click", function() {controlador_players.eliminarPlayer(el.name,el.id,el.posicion); });})
-          //localStorage.setItem("equipo",JSON.stringify(controlador_players.listaPlayers))
-          
-          
-      }
-    
-    eliminarPlayer(nombre,borrar,pos){  
-        console.log(`Se pidio eliminar al jugador ${nombre}`)
- 
-        document.getElementById(`eliminar${borrar}`).parentNode.remove()
-
-        this.listaPlayers.forEach(el=>{
-            if(el.id == borrar){
-                let orden = this.listaPlayers.indexOf(el)
-                this.listaPlayers.splice(orden, 1);
-               
-            }
-
-        })
-        
-        console.log(this.listaPlayers)
-        
-            }
-      
-    
-      
-      mostrarPlayer(player){
-      
-        document.getElementById(player.posicion).innerHTML += ` <div class="card">
-          
-        <img class="card-img-top" src="./assets/img/nophoto.jfif" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title" id="name">${player.name}</</h5>
-            <p class="card-text">${player.posicion.toUpperCase()}</p>
-            
-         </div>
-         <button type="button" class="close" aria-label="Close" id="eliminar${player.id}">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>`;
-
-      
-  
-       
-
-          
-
-        
-        
-        
-      
-        console.log(this.listaPlayers)
-        
-        
-
-        
-
-      }
-      
-    }  
-
-
-
-function submit(e){
-e.preventdefault();
-}
 
 function toast(mensaje){
   Toastify({
@@ -102,83 +11,188 @@ function toast(mensaje){
 }
 
 
+class player{
+    constructor (name,posicion,id){
+        this.name = name
+        this.id = id
+        this.posicion = posicion
+    }
+    
+}
 
-  
-  function main(form){
+class playerController{
+    constructor(){
+        this.listaPlayers = []
+    }
+
+
+    agregarPlayer(nombre,posicion) {
+      let def =   this.listaPlayers.filter(jug=> jug.posicion=="def")
+      let med =   this.listaPlayers.filter(jug=> jug.posicion=="med")
+      let del =   this.listaPlayers.filter(jug=> jug.posicion=="del")
+      let arq =   this.listaPlayers.filter(jug=> jug.posicion=="arq")
+
+     if(posicion=="arq"){
        
-        let posicion = form.pos.value
-        let jugador = form.nombre.value
+           
+       if(arq.length>=1){
+           toast("Maximo 1 arquero")
+         }
+         else{
+           
+          id = id+1
+           let jugador = new player(nombre,posicion,id)      
 
-        let arq = controlador_players.listaPlayers.filter(jug=> jug.posicion="arq")
-        let def = controlador_players.listaPlayers.filter(jug=> jug.posicion="def")
-        let med = controlador_players.listaPlayers.filter(jug=> jug.posicion="med")
-        let del = controlador_players.listaPlayers.filter(jug=> jug.posicion="del")
+           this.listaPlayers.push(jugador)
+           this.mostrarPlayer(jugador)
+
+         }
+       }
+
+         else if(posicion=="def"){
+           
+           if(def.length>=4){
+           
+             toast("Maximo 4 defensores")
+           }
+           else{
+            id = id+1
+             let jugador = new player(nombre,posicion,id)      
+
+             this.listaPlayers.push(jugador)
+             this.mostrarPlayer(jugador)
+           }
+         }
+
+         else if(posicion=="med"){
+          
+           if(med.length>=4){
+             toast("Maximo 4 mediocampistas")
+           }
+           else{
+            id = id+1
+             let jugador = new player(nombre,posicion,id)      
+
+             this.listaPlayers.push(jugador)
+             this.mostrarPlayer(jugador)
+           }
+         }
+
+         else if(posicion=="del"){
+          
+          
+           if(del.length>=2){
+             toast("Maximo 2 delanteros")
+           }
+           else{
+            id = id+1
+             let jugador = new player(nombre,posicion,id)      
+
+             this.listaPlayers.push(jugador)
+             this.mostrarPlayer(jugador)
+           }
+         }
+    
+      console.log(this.listaPlayers)
         
-        if(posicion=="arq"){
+
         
-            
-            if(arq.length>=1){
-                toast("Maximo 1 arquero")
-              }
-              else{
-                
-                
-              controlador_players.agregarPlayer(jugador,posicion)
-     
-              }
+        this.listaPlayers.forEach(el=>{ 
+          document.getElementById(`eliminar${el.id}`).addEventListener("click", function() {controlador_players.eliminarPlayer(el.name,el.id); });})
+         
+          localStorage.setItem("equipo",JSON.stringify(this.listaPlayers))  
+          
+      }
+    
+    eliminarPlayer(nombre,borrar){  
+        console.log(`Se pidio eliminar al jugador ${nombre}${borrar}`)
+ 
+        this.listaPlayers.forEach(el=>{
+            if(el.id == borrar){
+                let orden = this.listaPlayers.indexOf(el)
+                this.listaPlayers.splice(orden, 1);
+                document.getElementById(`eliminar${el.id}`).parentNode.remove()
             }
 
-              else if(posicion=="def"){
-                
-                if(def.length>=4){
-                  toast("Maximo 4 defensores")
-                }
-                else{
-                  
-                  def = controlador_players.agregarPlayer(jugador,posicion,def)
-                }
-              }
+        })
+        
+        localStorage.setItem("equipo",JSON.stringify(this.listaPlayers))  
+        
+      }
+      
+    
+      
+    mostrarPlayer(player){
+      
+        document.getElementById(player.posicion).innerHTML += ` <div class="card">
+          
+        <img class="card-img-top" src="./assets/img/nophoto.jfif" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title" id="name">${player.name}</h5>
+            <p class="card-text">${player.posicion.toUpperCase()}</p>
+            
+         </div>
+         <button type="button" class="close" aria-label="Close" id="eliminar${player.id}">
+          <span aria-hidden="true">X</span>
+        </button>
+      </div>`;
 
-              else if(posicion=="med"){
-                
-                if(med.length>=4){
-                  toast("Maximo 4 mediocampistas")
-                }
-                else{
-                  med=med+1
-                 med= controlador_players.agregarPlayer(jugador,posicion,med)
-                }
-              }
+      }
+      
+}  
 
-              else if(posicion=="del"){
-               
-                console.log(del)
-                if(del.length>=2){
-                  toast("Maximo 2 delanteros")
-                }
-                else{
-                  del=del+1
-                  del = controlador_players.agregarPlayer(jugador,posicion,del)
-                }
-              }
-              
-           
-           
 
-        }
+
+function submit(e){
+e.preventdefault();
+
+}
+
+function main(form){
+   
+    let juegade = form.pos.value
+    let jugador = form.nombre.value
+       
+    controlador_players.agregarPlayer(jugador,juegade)
+    
+        
+}
         
 
-      
-      
+           
+            
+
+       
 
 
-
-
-
-let jugadores = []
 
 const controlador_players = new playerController()
 
-const storage = JSON.parse(localStorage.getItem("equipo"))
 
-console.log(storage)
+if(localStorage.getItem("equipo")==null){
+  Swal.fire('No se encontraron formaciones guardadas. Recordá que se guarda automaticamente tu ultima sesión.')
+}
+else{
+Swal.fire({
+  title: 'Se encontró una formación anterior',
+  text: "¿Desea cargarla?",
+  icon: 'question',
+  showDenyButton: true,
+  showCancelButton: false,
+  confirmButtonText: 'Cargar',
+  denyButtonText: `Empezar de 0`,
+  confirmButtonColor: '#d36a11',
+  denyButtonColor: '#124bd1',
+  
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+      const storage = JSON.parse(localStorage.getItem("equipo"))
+      storage.forEach(el=>{
+      controlador_players.agregarPlayer(el.name,el.posicion)
+})
+  } else if (result.isDenied) {
+    
+  }
+})
+}

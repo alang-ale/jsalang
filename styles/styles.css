@@ -4,25 +4,41 @@
     box-sizing: border-box;
 }
 
+body{
+    height: 100vh;
+}
 .cancha{
-    height: 500px;
+    width: 40%;
+    height: 100%;
+    margin-left: 30%;
+    
     display: flex;
-    background-color: chartreuse;
+    flex-direction: column;
+    background: url(../assets/img/Untitled.svg);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
    
+  
+    
 }
 
+
 #arq{
-    width: 25%;
+    height: 25%;
     display: flex;
     align-items: center;
-   
+    justify-content: space-around;
+   margin-top: 20px;
 }
 
 #def,#med,#del{
-    width: 25%;
+    height: 25%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around; 
+    flex-direction: row;
+    justify-content: space-evenly; 
+    margin-left: 50px ;
+    margin-right: 50px;
 }
 
 
@@ -31,19 +47,36 @@
 
 .card{
     width: 70px;
-    font-size: 10px;
+    font-size: 5px;
+    margin-bottom: 60px;
+    border-color: black;
+    border-width: 1px;
+    box-shadow: 3px 3px rgba(0, 0, 0, 0.291);
 }
 
-
+#arq #name{
+    background-color: rgb(254, 212, 0);
+}
+#def #name{
+    background-color: rgb(98, 0, 255);
+}
+#med #name{
+    background-color: rgb(35, 127, 45);
+}
+#del #name{
+    
+    background-color: rgb(255, 0, 0);
+}
 
 .card-body{
     text-align: center;
-    
     padding:0;
+    
 }
 
 .card-title{
-    font-size: 15px;
+    font-size: 10px;
+    font-weight: bold;
 }
 .card-img-top{
     padding:5px;
@@ -53,12 +86,26 @@
     margin:auto;
   
 } 
-
-#eliminar{
+.card-text{
+    font-size: 8px;
+}
+.close{
     margin:auto;
-    border-radius: 25%;
+    border-radius: 50%;
     font-weight: bold;
-    background-color: rgba(251, 2, 2, 0.545);
+    background-color: rgb(251, 2, 2);
     color: white;
     font-size: 10px;
+    height: fit-content;
+    padding-left: 3px;
+    padding-right: 3px;
+    position: absolute;
 }
+
+.form{
+    background-color: black;
+    height: 50px;
+    padding-top: 10px;
+    text-align: center;
+}
+
