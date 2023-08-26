@@ -158,41 +158,76 @@ function main(form){
         
 }
         
-
+function stg(){
+  if(localStorage.getItem("equipo")==null){
+    Swal.fire('No se encontraron formaciones guardadas. Recordá que se guarda automaticamente tu ultima sesión.')
+  }
+  else{
+  Swal.fire({
+    title: 'Se encontró una formación anterior',
+    text: "¿Desea cargarla? Todo su progreso se perderá",
+    icon: 'question',
+    showDenyButton: true,
+    showCancelButton: false,
+    confirmButtonText: 'Cargar',
+    denyButtonText: `Seguir editando`,
+    confirmButtonColor: '#d36a11',
+    denyButtonColor: '#124bd1',
+    
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+        const storage = JSON.parse(localStorage.getItem("equipo"))
+        storage.forEach(el=>{
+        controlador_players.agregarPlayer(el.name,el.posicion)
+  })
+    } else if (result.isDenied) {
+      
+    }
+  })
+  }
+}
            
-            
+function ind(){
 
-       
+
+fetch("./ind2017.json")
+.then(response=> response.json())
+.then(json=>{
+  Swal.fire({
+    title: 'Si cargas esta formación, perderás todo tu progreso.',
+    text: "¿Desea cargarla? Todo su progreso se perderá",
+    icon: 'question',
+    showDenyButton: true,
+    showCancelButton: false,
+    confirmButtonText: 'Cargar',
+    denyButtonText: `Seguir editando`,
+    confirmButtonColor: '#d36a11',
+    denyButtonColor: '#124bd1',
+    
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      json.forEach(el=>controlador_players.agregarPlayer(el.name,el.posicion))
+    } else if (result.isDenied) {
+      
+    }
+  })
+           
+} )
+
+
+}
+
+const stg_btn = document.getElementById("stg")            
+stg_btn.addEventListener("click",stg)
+
+const ind_btn = document.getElementById("ind")            
+ind_btn.addEventListener("click",ind)
 
 
 
 const controlador_players = new playerController()
 
 
-if(localStorage.getItem("equipo")==null){
-  Swal.fire('No se encontraron formaciones guardadas. Recordá que se guarda automaticamente tu ultima sesión.')
-}
-else{
-Swal.fire({
-  title: 'Se encontró una formación anterior',
-  text: "¿Desea cargarla?",
-  icon: 'question',
-  showDenyButton: true,
-  showCancelButton: false,
-  confirmButtonText: 'Cargar',
-  denyButtonText: `Empezar de 0`,
-  confirmButtonColor: '#d36a11',
-  denyButtonColor: '#124bd1',
-  
-}).then((result) => {
-  /* Read more about isConfirmed, isDenied below */
-  if (result.isConfirmed) {
-      const storage = JSON.parse(localStorage.getItem("equipo"))
-      storage.forEach(el=>{
-      controlador_players.agregarPlayer(el.name,el.posicion)
-})
-  } else if (result.isDenied) {
-    
-  }
-})
-}
+

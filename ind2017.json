@@ -1,0 +1,47 @@
+[
+    {
+        "name": "Campaña",
+        "posicion": "arq"
+    },
+    {
+        "name": "Bustos",
+        "posicion": "def"
+    },
+    {
+        "name": "Franco",
+        "posicion": "def"
+    },
+    {
+        "name": "Silva",
+        "posicion": "def"
+    },
+    {
+        "name": "Tagliafico",
+        "posicion": "def"
+    },
+    {
+        "name": "Benitez",
+        "posicion": "del"
+    },
+    {
+        
+        "name": "Meza",
+        "posicion": "med"
+    },
+    {
+        "name": "Sanchez Miño",
+        "posicion": "med"
+    },
+    {
+        "name": "Rodriguez",
+        "posicion": "med"
+    },
+    {
+        "name": "Barco",
+        "posicion": "med"
+    },
+    {
+        "name": "Gigliotti",
+        "posicion": "del"
+    }
+]

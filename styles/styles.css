@@ -6,12 +6,23 @@
 
 body{
     height: 100vh;
+    background-color: #2b332b;
+    background-color: #2b332b;
+    background-color: #000000;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cg fill='%235e5e5e' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M0 0h4v4H0V0zm4 4h4v4H4V4z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.main{
+    width: 75%;
+   display:flex;
+   justify-content: center;
+}
+.datos{
+    width:25%;
 }
 .cancha{
-    width: 40%;
-    height: 100%;
-    margin-left: 30%;
-    
+    height: 100%;    
+    width: 50%;
     display: flex;
     flex-direction: column;
     background: url(../assets/img/Untitled.svg);
@@ -37,8 +48,9 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly; 
-    margin-left: 50px ;
-    margin-right: 50px;
+    margin-left: 100px ;
+    margin-right: 100px;
+    
 }
 
 
@@ -47,6 +59,7 @@ body{
 
 .card{
     width: 70px;
+    height: 100px;
     font-size: 5px;
     margin-bottom: 60px;
     border-color: black;
@@ -61,7 +74,7 @@ body{
     background-color: rgb(98, 0, 255);
 }
 #med #name{
-    background-color: rgb(35, 127, 45);
+    background-color: rgb(6, 250, 46);
 }
 #del #name{
     
@@ -75,8 +88,9 @@ body{
 }
 
 .card-title{
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
+   
 }
 .card-img-top{
     padding:5px;
@@ -88,6 +102,12 @@ body{
 } 
 .card-text{
     font-size: 8px;
+    background-color:black;
+    color: white;
+  
+    width:100%;
+    position:absolute;
+    bottom:0;
 }
 .close{
     margin:auto;
@@ -108,4 +128,5 @@ body{
     padding-top: 10px;
     text-align: center;
 }
+
 
